@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { v4 as uuidV4 } from 'uuid';
+import Room from './components/Room';
+import Lobby from './components/Lobby';
+import logo from "./components/logo.png"
+import Navbar from './components/Navbar';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='bg-black'>
+      <Navbar />
+
+
+      <Routes>
+        <Route
+          path="/"
+          element={<Navigate to={`/room/make-meet`} replace />}
+        />
+        {/* <Route 
+          path="/" 
+          element={<Navigate to={`/room-/${uuidV4()}`} replace />} 
+        /> */}
+        <Route path="/room/:roomId" element={<Room />} />
+        <Route path="/room/make-meet" element={<Lobby />} />
+
+      </Routes>
     </div>
   );
 }
